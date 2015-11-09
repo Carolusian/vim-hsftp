@@ -9,7 +9,7 @@
 " Author: Viktor Hesselbom (hesselbom.net)
 " License: MIT
 
-function! h:GetConf()
+function! GetConf()
   let conf = {}
 
   let l:configpath = expand('%:p:h')
@@ -53,8 +53,8 @@ function! h:GetConf()
   return conf
 endfunction
 
-function! h:DownloadFile()
-  let conf = h:GetConf()
+function! DownloadFile()
+  let conf = GetConf()
 
   if has_key(conf, 'host')
     let action = printf('get %s %s', conf['remotepath'], conf['localpath'])
@@ -75,8 +75,8 @@ function! h:DownloadFile()
   endif
 endfunction
 
-function! h:UploadFile()
-  let conf = h:GetConf()
+function! UploadFile()
+  let conf = GetConf()
 
   if has_key(conf, 'host')
     let action = printf('put %s %s', conf['localpath'], conf['remotepath'])
@@ -96,8 +96,8 @@ function! h:UploadFile()
   endif
 endfunction
 
-function! h:UploadFolder()
-  let conf = h:GetConf()
+function! UploadFolder()
+  let conf = GetConf()
 
   " execute "! echo " . file
   " let conf['localpath'] = expand('%:p')
@@ -127,9 +127,9 @@ function! h:UploadFolder()
 
 endfunction
 
-command! Hdownload call h:DownloadFile()
-command! Hupload call h:UploadFile()
-command! Hupdir  call h:UploadFolder()
+command! Hdownload call DownloadFile()
+command! Hupload call UploadFile()
+command! Hupdir  call UploadFolder()
 
 nmap <leader>hsd :Hdownload<Esc>
 nmap <leader>hsu :Hupload<Esc>
